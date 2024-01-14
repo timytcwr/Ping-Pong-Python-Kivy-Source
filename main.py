@@ -60,10 +60,12 @@ class PongGame(Widget):
 		if self.ball.x < self.x:
 			# Первый игрок проиграл, добавляем 1 очко второму игроку
 			self.player2.score += 1
+			self.serve_ball(vel=(4,0)) # заново спавним шарик в центре
 
 		if self.ball.x > self.width:
 			# Второй игрок проиграл, добавляем 1 очко первому игроку
 			self.player1.score += 1
+			self.serve_ball(vel=(-4,0)) # заново спавним шарик в центре
 
 	# Событие прикосновения к экрану
 	def on_touch_move(self, touch):
@@ -84,4 +86,3 @@ class PongApp(App):
 
 if __name__ == '__main__':
 	PongApp().run()
-	# "G:\Ping Pong\Python\apps\python.exe" "G:\Ping Pong\main.py"
