@@ -8,7 +8,7 @@ from kivy.clock import Clock
 from random import randint
 
 class PongPaddle(Widget):
-	score = NumericProperty(0) ## очки игрока
+	score = NumericProperty(0.01)  # Player's score
 
 	## Отскок мячика при коллизии с панелькой игрока
 	def bounce_ball(self, ball):
@@ -54,18 +54,20 @@ class PongGame(Widget):
 		if(self.ball.y < 0) or (self.ball.top > self.height):
 			self.ball.velocity_y *= -1 # инверсируем текущую скорость по оси Y
 
+# C:\Users\SysX\AppData\Local\Microsoft\WindowsApps\python3.12.exe
+
 		# отскок шарика по оси X
 		# тут если шарик смог уйти за панельку игрока, то есть игрок не успел отбить шарик
 		# то это значит что он проиграл и мы добавим +1 очко противнику
-		if self.ball.x < self.x:
+		if self.ball.x < 0:
 			# Первый игрок проиграл, добавляем 1 очко второму игроку
 			self.player2.score += 1
-			self.serve_ball(vel=(4,0)) # заново спавним шарик в центре
+			#self.serve_ball(vel=(4,0)) # заново спавним шарик в центре
 
 		if self.ball.x > self.width:
 			# Второй игрок проиграл, добавляем 1 очко первому игроку
 			self.player1.score += 1
-			self.serve_ball(vel=(-4,0)) # заново спавним шарик в центре
+            #self.serve_ball(vel=(4,0)) # заново спавним шарик в центре
 
 	# Событие прикосновения к экрану
 	def on_touch_move(self, touch):
